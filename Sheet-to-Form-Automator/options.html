@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sheet-to-Form Automator - Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Sheet-to-Form Automator Settings</h1>
+      <p class="subtitle">Configure your Google Sheet for automated form filling</p>
+    </header>
+
+    <main class="main-content">
+      <div class="settings-section">
+        <h2>Google Sheet Configuration</h2>
+        
+        <div class="form-group">
+          <label for="sheetUrl">Google Sheet URL:</label>
+          <input 
+            type="url" 
+            id="sheetUrl" 
+            placeholder="https://docs.google.com/spreadsheets/d/your-sheet-id/edit#gid=0"
+            class="url-input"
+          >
+          <p class="help-text">
+            Enter the URL of your public Google Sheet. Make sure the sheet is publicly viewable.
+          </p>
+        </div>
+
+        <div class="form-actions">
+          <button id="saveBtn" class="save-btn">💾 Save Settings</button>
+          <button id="testBtn" class="test-btn">🧪 Test Connection</button>
+        </div>
+
+        <div id="statusMessage" class="status-message" style="display: none;"></div>
+      </div>
+
+      <div class="info-section">
+        <h3>Sheet Format Requirements</h3>
+        <div class="format-info">
+          <p>Your Google Sheet must have exactly 4 columns in this order:</p>
+          <ol>
+            <li><strong>FieldName</strong> - Descriptive name for the field</li>
+            <li><strong>Selector</strong> - CSS selector or XPath to target the element</li>
+            <li><strong>SelectorType</strong> - Either "css" or "xpath"</li>
+            <li><strong>Value</strong> - The value to enter, or "CLICK" for buttons, "CHECK" for checkboxes</li>
+          </ol>
+        </div>
+
+        <div class="example-section">
+          <h4>Example Sheet Structure:</h4>
+          <table class="example-table">
+            <thead>
+              <tr>
+                <th>FieldName</th>
+                <th>Selector</th>
+                <th>SelectorType</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Book Title</td>
+                <td>#data-book-title</td>
+                <td>css</td>
+                <td>The Last Horizon</td>
+              </tr>
+              <tr>
+                <td>Author Name</td>
+                <td>//input[@name='author']</td>
+                <td>xpath</td>
+                <td>Alex Rivera</td>
+              </tr>
+              <tr>
+                <td>Submit Button</td>
+                <td>.submit-btn</td>
+                <td>css</td>
+                <td>CLICK</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tips-section">
+          <h4>Tips:</h4>
+          <ul>
+            <li>Use browser developer tools to find accurate selectors</li>
+            <li>Test your selectors before adding them to the sheet</li>
+            <li>Use "CLICK" for buttons and "CHECK" for checkboxes</li>
+            <li>The extension supports elements inside iframes</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© Jay Gomz Inc.</p>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

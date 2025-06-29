@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sheet-to-Form Automator</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Sheet-to-Form Automator</h1>
+      <p class="subtitle">Automate form filling with Google Sheets</p>
+    </header>
+
+    <main class="main-content">
+      <button id="fillFormBtn" class="fill-btn">
+        <span class="btn-icon">📋</span>
+        Fill This Form
+      </button>
+
+      <div id="statusArea" class="status-area">
+        <p id="statusText" class="status-text">Ready to fill forms</p>
+        <div id="progressBar" class="progress-bar" style="display: none;">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="optionsBtn" class="secondary-btn">⚙️ Settings</button>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© Jay Gomz Inc.</p>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
