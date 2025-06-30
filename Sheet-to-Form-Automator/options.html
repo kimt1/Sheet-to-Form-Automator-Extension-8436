@@ -16,13 +16,12 @@
     <main class="main-content">
       <div class="settings-section">
         <h2>Google Sheet Configuration</h2>
-        
         <div class="form-group">
           <label for="sheetUrl">Google Sheet URL:</label>
           <input 
             type="url" 
             id="sheetUrl" 
-            placeholder="https://docs.google.com/spreadsheets/d/your-sheet-id/edit#gid=0"
+            placeholder="https://docs.google.com/spreadsheets/d/your-sheet-id/edit#gid=0" 
             class="url-input"
           >
           <p class="help-text">
@@ -44,14 +43,61 @@
           <p>Your Google Sheet must have exactly 4 columns in this order:</p>
           <ol>
             <li><strong>FieldName</strong> - Descriptive name for the field</li>
-            <li><strong>Selector</strong> - CSS selector or XPath to target the element</li>
-            <li><strong>SelectorType</strong> - Either "css" or "xpath"</li>
-            <li><strong>Value</strong> - The value to enter, or "CLICK" for buttons, "CHECK" for checkboxes</li>
+            <li><strong>Selector</strong> - The value used to find the element</li>
+            <li><strong>SelectorType</strong> - The method to find the element (see supported types below)</li>
+            <li><strong>Value</strong> - The value to enter, or special actions like "CLICK", "CHECK"</li>
           </ol>
         </div>
 
+        <div class="selector-types-section">
+          <h4>🎯 Supported Selector Types</h4>
+          <div class="selector-grid">
+            <div class="selector-category">
+              <h5>Basic Selectors</h5>
+              <ul>
+                <li><code>css</code> - CSS selector</li>
+                <li><code>xpath</code> - XPath expression</li>
+                <li><code>id</code> - Element ID</li>
+                <li><code>name</code> - Name attribute</li>
+                <li><code>class</code> - CSS class name</li>
+                <li><code>tag</code> - HTML tag name</li>
+              </ul>
+            </div>
+            
+            <div class="selector-category">
+              <h5>Text-Based</h5>
+              <ul>
+                <li><code>text</code> - Exact text content</li>
+                <li><code>partialtext</code> - Partial text match</li>
+                <li><code>placeholder</code> - Placeholder text</li>
+                <li><code>label</code> - Associated label text</li>
+              </ul>
+            </div>
+            
+            <div class="selector-category">
+              <h5>Attributes</h5>
+              <ul>
+                <li><code>title</code> - Title attribute</li>
+                <li><code>value</code> - Value attribute</li>
+                <li><code>type</code> - Input type</li>
+                <li><code>alt</code> - Alt text (images)</li>
+                <li><code>role</code> - ARIA role</li>
+                <li><code>data</code> - Data attributes</li>
+              </ul>
+            </div>
+            
+            <div class="selector-category">
+              <h5>Smart Options</h5>
+              <ul>
+                <li><code>auto</code> - Try multiple methods</li>
+                <li><code>smart</code> - Intelligent detection</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
         <div class="example-section">
-          <h4>Example Sheet Structure:</h4>
+          <h4>📋 Example Sheet Structure</h4>
           <table class="example-table">
             <thead>
               <tr>
@@ -63,34 +109,66 @@
             </thead>
             <tbody>
               <tr>
-                <td>Book Title</td>
-                <td>#data-book-title</td>
-                <td>css</td>
-                <td>The Last Horizon</td>
+                <td>Email Field</td>
+                <td>email</td>
+                <td>id</td>
+                <td>user@example.com</td>
               </tr>
               <tr>
-                <td>Author Name</td>
-                <td>//input[@name='author']</td>
-                <td>xpath</td>
-                <td>Alex Rivera</td>
+                <td>Password</td>
+                <td>password</td>
+                <td>name</td>
+                <td>mypassword</td>
               </tr>
               <tr>
-                <td>Submit Button</td>
-                <td>.submit-btn</td>
-                <td>css</td>
+                <td>Login Button</td>
+                <td>Sign In</td>
+                <td>text</td>
                 <td>CLICK</td>
+              </tr>
+              <tr>
+                <td>Newsletter</td>
+                <td>newsletter</td>
+                <td>auto</td>
+                <td>CHECK</td>
               </tr>
             </tbody>
           </table>
         </div>
 
+        <div class="actions-section">
+          <h4>🎬 Special Actions</h4>
+          <div class="actions-grid">
+            <div class="action-item">
+              <code>CLICK</code> - Click buttons, links, or any element
+            </div>
+            <div class="action-item">
+              <code>CHECK</code> - Check checkboxes or radio buttons
+            </div>
+            <div class="action-item">
+              <code>UNCHECK</code> - Uncheck checkboxes or radio buttons
+            </div>
+            <div class="action-item">
+              <code>CLEAR</code> - Clear field contents
+            </div>
+            <div class="action-item">
+              <code>FOCUS</code> - Focus on element
+            </div>
+            <div class="action-item">
+              <code>SUBMIT</code> - Submit form
+            </div>
+          </div>
+        </div>
+
         <div class="tips-section">
-          <h4>Tips:</h4>
+          <h4>💡 Pro Tips</h4>
           <ul>
-            <li>Use browser developer tools to find accurate selectors</li>
-            <li>Test your selectors before adding them to the sheet</li>
-            <li>Use "CLICK" for buttons and "CHECK" for checkboxes</li>
-            <li>The extension supports elements inside iframes</li>
+            <li><strong>Start Simple:</strong> Try <code>auto</code> selector type first - it tries multiple methods automatically</li>
+            <li><strong>Use Browser Tools:</strong> Right-click → Inspect Element to find IDs, classes, and names</li>
+            <li><strong>Text is Powerful:</strong> Use <code>text</code> type for buttons and links with visible text</li>
+            <li><strong>Data Attributes:</strong> Use <code>data</code> type with format like "data-testid=login-btn"</li>
+            <li><strong>Test Gradually:</strong> Start with one field, then add more as you confirm they work</li>
+            <li><strong>Partial Matching:</strong> Use <code>partialtext</code> when exact text might have extra spaces</li>
           </ul>
         </div>
       </div>
