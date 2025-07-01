@@ -16,7 +16,7 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   background: white;
-  box-shadow: 0 0 50px rgba(0,0,0,0.1);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
 }
@@ -82,7 +82,7 @@ body {
 .url-input:focus {
   outline: none;
   border-color: #4CAF50;
-  box-shadow: 0 0 0 3px rgba(76,175,80,0.1);
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
 }
 
 .help-text {
@@ -106,9 +106,6 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .save-btn {
@@ -118,7 +115,7 @@ body {
 
 .save-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(76,175,80,0.3);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .test-btn {
@@ -175,13 +172,6 @@ body {
   margin: 25px 0 15px 0;
 }
 
-.info-section h5 {
-  color: #2d3748;
-  font-size: 14px;
-  margin: 15px 0 8px 0;
-  font-weight: 600;
-}
-
 .format-info p {
   color: #4a5568;
   margin-bottom: 12px;
@@ -198,12 +188,32 @@ body {
   margin-bottom: 8px;
 }
 
-.selector-types-section {
-  margin-top: 30px;
-  padding: 25px;
+.example-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 13px;
   background: #f8f9fa;
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  overflow: hidden;
+}
+
+.example-table th,
+.example-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.example-table th {
+  background: #e9ecef;
+  font-weight: 600;
+  color: #495057;
+}
+
+.example-table td {
+  color: #6c757d;
+  font-family: 'Monaco', 'Menlo', monospace;
 }
 
 .selector-grid {
@@ -214,15 +224,21 @@ body {
 }
 
 .selector-category {
-  background: white;
+  background: #f8f9fa;
   padding: 15px;
   border-radius: 6px;
   border: 1px solid #dee2e6;
 }
 
+.selector-category h5 {
+  color: #2d3748;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
 .selector-category ul {
   list-style: none;
-  margin-top: 8px;
 }
 
 .selector-category li {
@@ -241,57 +257,18 @@ body {
   font-weight: 600;
 }
 
-.example-section {
-  margin-top: 25px;
-}
-
-.example-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 12px;
-  font-size: 13px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.example-table th, .example-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.example-table th {
-  background: #e9ecef;
-  font-weight: 600;
-  color: #495057;
-}
-
-.example-table td {
-  color: #6c757d;
-  font-family: 'Monaco', 'Menlo', monospace;
-}
-
-.actions-section {
-  margin-top: 25px;
-  padding: 20px;
-  background: #fff3cd;
-  border-radius: 8px;
-  border: 1px solid #ffeaa7;
-}
-
 .actions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
   margin-top: 15px;
 }
 
 .action-item {
   padding: 8px 12px;
-  background: white;
+  background: #fff3cd;
   border-radius: 4px;
-  border: 1px solid #f1c40f;
+  border: 1px solid #ffeaa7;
   font-size: 13px;
   color: #856404;
 }
@@ -321,10 +298,6 @@ body {
 
 .tips-section li {
   margin-bottom: 8px;
-}
-
-.tips-section strong {
-  color: #0c5460;
 }
 
 .tips-section code {
@@ -365,7 +338,8 @@ body {
     padding: 30px 20px;
   }
   
-  .settings-section, .info-section {
+  .settings-section,
+  .info-section {
     padding: 20px;
   }
   
@@ -385,7 +359,8 @@ body {
     font-size: 12px;
   }
   
-  .example-table th, .example-table td {
+  .example-table th,
+  .example-table td {
     padding: 8px;
   }
 }

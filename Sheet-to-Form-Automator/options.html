@@ -3,25 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sheet-to-Form Automator - Settings</title>
+  <title>NINJA MODE Sheet-to-Form Automator - Settings</title>
   <link rel="stylesheet" href="options.css">
 </head>
 <body>
   <div class="container">
     <header class="header">
-      <h1>Sheet-to-Form Automator Settings</h1>
-      <p class="subtitle">Configure your Google Sheet for automated form filling</p>
+      <h1>🥷 NINJA MODE Sheet-to-Form Automator Settings</h1>
+      <p class="subtitle">Configure your Google Sheet for ultimate stealth automated form filling</p>
     </header>
 
     <main class="main-content">
       <div class="settings-section">
         <h2>Google Sheet Configuration</h2>
+        
         <div class="form-group">
           <label for="sheetUrl">Google Sheet URL:</label>
           <input 
             type="url" 
             id="sheetUrl" 
-            placeholder="https://docs.google.com/spreadsheets/d/your-sheet-id/edit#gid=0" 
+            placeholder="https://docs.google.com/spreadsheets/d/your-sheet-id/edit#gid=0"
             class="url-input"
           >
           <p class="help-text">
@@ -38,66 +39,21 @@
       </div>
 
       <div class="info-section">
-        <h3>Sheet Format Requirements</h3>
+        <h3>🥷 NINJA MODE Sheet Format Requirements</h3>
+        
         <div class="format-info">
-          <p>Your Google Sheet must have exactly 4 columns in this order:</p>
+          <p><strong>Your Google Sheet must have 4-5 columns in this order:</strong></p>
           <ol>
             <li><strong>FieldName</strong> - Descriptive name for the field</li>
             <li><strong>Selector</strong> - The value used to find the element</li>
-            <li><strong>SelectorType</strong> - The method to find the element (see supported types below)</li>
-            <li><strong>Value</strong> - The value to enter, or special actions like "CLICK", "CHECK"</li>
+            <li><strong>SelectorType</strong> - The method to find the element</li>
+            <li><strong>Value</strong> - The value to enter, or special actions</li>
+            <li><strong>Trigger</strong> - <span style="color: #e74c3c; font-weight: bold;">NEW!</span> Anti-robot & NINJA MODE settings</li>
           </ol>
         </div>
 
-        <div class="selector-types-section">
-          <h4>🎯 Supported Selector Types</h4>
-          <div class="selector-grid">
-            <div class="selector-category">
-              <h5>Basic Selectors</h5>
-              <ul>
-                <li><code>css</code> - CSS selector</li>
-                <li><code>xpath</code> - XPath expression</li>
-                <li><code>id</code> - Element ID</li>
-                <li><code>name</code> - Name attribute</li>
-                <li><code>class</code> - CSS class name</li>
-                <li><code>tag</code> - HTML tag name</li>
-              </ul>
-            </div>
-            
-            <div class="selector-category">
-              <h5>Text-Based</h5>
-              <ul>
-                <li><code>text</code> - Exact text content</li>
-                <li><code>partialtext</code> - Partial text match</li>
-                <li><code>placeholder</code> - Placeholder text</li>
-                <li><code>label</code> - Associated label text</li>
-              </ul>
-            </div>
-            
-            <div class="selector-category">
-              <h5>Attributes</h5>
-              <ul>
-                <li><code>title</code> - Title attribute</li>
-                <li><code>value</code> - Value attribute</li>
-                <li><code>type</code> - Input type</li>
-                <li><code>alt</code> - Alt text (images)</li>
-                <li><code>role</code> - ARIA role</li>
-                <li><code>data</code> - Data attributes</li>
-              </ul>
-            </div>
-            
-            <div class="selector-category">
-              <h5>Smart Options</h5>
-              <ul>
-                <li><code>auto</code> - Try multiple methods</li>
-                <li><code>smart</code> - Intelligent detection</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
         <div class="example-section">
-          <h4>📋 Example Sheet Structure</h4>
+          <h4>🥷 NINJA MODE Example Sheet Structure</h4>
           <table class="example-table">
             <thead>
               <tr>
@@ -105,6 +61,7 @@
                 <th>Selector</th>
                 <th>SelectorType</th>
                 <th>Value</th>
+                <th style="background-color: #e8f5e8;">Trigger</th>
               </tr>
             </thead>
             <tbody>
@@ -113,69 +70,178 @@
                 <td>email</td>
                 <td>id</td>
                 <td>user@example.com</td>
+                <td style="background-color: #1a1a1a; color: #00ff00; font-weight: bold;">NINJA</td>
               </tr>
               <tr>
                 <td>Password</td>
                 <td>password</td>
                 <td>name</td>
                 <td>mypassword</td>
+                <td style="background-color: #1a1a1a; color: #00ff00; font-weight: bold;">NINJA</td>
               </tr>
               <tr>
                 <td>Login Button</td>
                 <td>Sign In</td>
                 <td>text</td>
                 <td>CLICK</td>
+                <td style="background-color: #1a1a1a; color: #00ff00; font-weight: bold;">NINJA</td>
               </tr>
               <tr>
-                <td>Newsletter</td>
+                <td>Regular Field</td>
                 <td>newsletter</td>
                 <td>auto</td>
                 <td>CHECK</td>
+                <td style="background-color: #f0f8ff;">STEALTH</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="actions-section">
-          <h4>🎬 Special Actions</h4>
-          <div class="actions-grid">
-            <div class="action-item">
-              <code>CLICK</code> - Click buttons, links, or any element
+        <div class="ninja-feature-section" style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); padding: 25px; border-radius: 12px; margin: 25px 0; border: 3px solid #00ff00; color: white;">
+          <h4 style="color: #00ff00; margin-bottom: 15px; text-shadow: 0 0 10px #00ff00;">🥷 NEW: NINJA MODE - ULTIMATE CHAOS!</h4>
+          
+          <div style="background: rgba(0, 255, 0, 0.1); padding: 20px; border-radius: 8px; border: 1px solid #00ff00; margin-bottom: 20px;">
+            <h5 style="color: #00ff00; margin-bottom: 15px;">🔥 NINJA MODE Features:</h5>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div style="color: #ffffff;">
+                <strong>🎯 Simultaneous Actions:</strong><br>
+                • Focus + Hover + Mouse Move<br>
+                • Multiple events at once<br>
+                • Chaos event storms
+              </div>
+              <div style="color: #ffffff;">
+                <strong>⚡ Random Everything:</strong><br>
+                • Random delays (0.8-3.5s)<br>
+                • Random mouse paths<br>
+                • Random event sequences
+              </div>
+              <div style="color: #ffffff;">
+                <strong>🔥 Keyboard Chaos:</strong><br>
+                • Simulated key presses<br>
+                • Multiple input methods<br>
+                • Realistic typing patterns
+              </div>
+              <div style="color: #ffffff;">
+                <strong>🌪️ Mouse Mayhem:</strong><br>
+                • Curved mouse movement<br>
+                • Multiple click events<br>
+                • Hover simulations
+              </div>
             </div>
-            <div class="action-item">
-              <code>CHECK</code> - Check checkboxes or radio buttons
+          </div>
+
+          <div style="background: rgba(255, 0, 0, 0.1); padding: 15px; border-radius: 8px; border: 1px solid #ff0000; margin-bottom: 15px;">
+            <p style="margin: 0; font-size: 14px; color: #ff6666;">
+              <strong>⚠️ WARNING:</strong> NINJA MODE is the ultimate anti-robot weapon. Use <code style="background: #000; color: #00ff00; padding: 2px 6px; border-radius: 3px;">NINJA</code> for maximum chaos and stealth!
+            </p>
+          </div>
+        </div>
+
+        <div class="trigger-options">
+          <h4>🎯 All Trigger Mode Options</h4>
+          
+          <h5 style="margin-bottom: 10px;">Speed & Stealth Modes:</h5>
+          <div class="trigger-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 15px;">
+            <span class="trigger-item" style="padding: 8px 12px; background: #d4edda; border-radius: 6px; font-size: 13px; color: #155724; text-align: center;">
+              <code style="background: #c3e6cb; padding: 2px 6px; border-radius: 3px;">FAST</code> - 50-200ms delay
+            </span>
+            <span class="trigger-item" style="padding: 8px 12px; background: #cce7ff; border-radius: 6px; font-size: 13px; color: #004085; text-align: center;">
+              <code style="background: #b3d7ff; padding: 2px 6px; border-radius: 3px;">NORMAL</code> - 200-500ms delay
+            </span>
+            <span class="trigger-item" style="padding: 8px 12px; background: #fff3cd; border-radius: 6px; font-size: 13px; color: #856404; text-align: center;">
+              <code style="background: #ffeaa7; padding: 2px 6px; border-radius: 3px;">SLOW</code> - 600-1200ms delay
+            </span>
+            <span class="trigger-item" style="padding: 8px 12px; background: #f8d7da; border-radius: 6px; font-size: 13px; color: #721c24; text-align: center;">
+              <code style="background: #f5c6cb; padding: 2px 6px; border-radius: 3px;">HUMAN</code> - 800-1800ms delay
+            </span>
+            <span class="trigger-item" style="padding: 8px 12px; background: #d1ecf1; border-radius: 6px; font-size: 13px; color: #0c5460; text-align: center;">
+              <code style="background: #bee5eb; padding: 2px 6px; border-radius: 3px;">STEALTH</code> - 1500-2800ms delay
+            </span>
+            <span class="trigger-item" style="padding: 8px 12px; background: #e2e3e5; border-radius: 6px; font-size: 13px; color: #383d41; text-align: center;">
+              <code style="background: #d6d8db; padding: 2px 6px; border-radius: 3px;">ULTRA</code> - 2500-4000ms delay
+            </span>
+            <span class="trigger-item" style="padding: 8px 12px; background: linear-gradient(45deg, #1a1a1a, #2d2d2d); border-radius: 6px; font-size: 14px; color: #00ff00; text-align: center; border: 2px solid #00ff00; font-weight: bold; text-shadow: 0 0 5px #00ff00;">
+              <code style="background: #000; color: #00ff00; padding: 3px 8px; border-radius: 3px; border: 1px solid #00ff00;">NINJA</code> - ULTIMATE CHAOS!
+            </span>
+          </div>
+
+          <h5 style="margin-bottom: 10px;">Control Options:</h5>
+          <div class="control-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 15px;">
+            <span style="padding: 6px 10px; background: #f8d7da; border-radius: 4px; font-size: 12px; color: #721c24; text-align: center;">
+              <code>OFF</code> - Skip field
+            </span>
+            <span style="padding: 6px 10px; background: #f8d7da; border-radius: 4px; font-size: 12px; color: #721c24; text-align: center;">
+              <code>DISABLED</code> - Skip field
+            </span>
+            <span style="padding: 6px 10px; background: #d4edda; border-radius: 4px; font-size: 12px; color: #155724; text-align: center;">
+              <code>ON</code> - Process field
+            </span>
+            <span style="padding: 6px 10px; background: #cce7ff; border-radius: 4px; font-size: 12px; color: #004085; text-align: center;">
+              <code>DELAY:500</code> - Custom delay ±30%
+            </span>
+          </div>
+        </div>
+
+        <div class="selector-types">
+          <h4>🎯 Enhanced Selector Types</h4>
+          <div class="selector-grid">
+            <div class="selector-category">
+              <h5>Basic</h5>
+              <ul>
+                <li><code>id</code> - Element ID</li>
+                <li><code>name</code> - Name attribute</li>
+                <li><code>class</code> - CSS class</li>
+                <li><code>css</code> - CSS selector</li>
+              </ul>
             </div>
-            <div class="action-item">
-              <code>UNCHECK</code> - Uncheck checkboxes or radio buttons
+            <div class="selector-category">
+              <h5>Text-Based</h5>
+              <ul>
+                <li><code>text</code> - Exact text</li>
+                <li><code>placeholder</code> - Placeholder text</li>
+                <li><code>label</code> - Label text</li>
+              </ul>
             </div>
-            <div class="action-item">
-              <code>CLEAR</code> - Clear field contents
-            </div>
-            <div class="action-item">
-              <code>FOCUS</code> - Focus on element
-            </div>
-            <div class="action-item">
-              <code>SUBMIT</code> - Submit form
+            <div class="selector-category">
+              <h5>Advanced</h5>
+              <ul>
+                <li><code>xpath</code> - XPath selector</li>
+                <li><code>auto</code> - Try multiple methods</li>
+                <li><code>smart</code> - Intelligent detection</li>
+              </ul>
             </div>
           </div>
         </div>
 
+        <div class="actions-info">
+          <h4>🎬 Special Actions</h4>
+          <div class="actions-grid">
+            <span class="action-item"><code>CLICK</code> - Click element</span>
+            <span class="action-item"><code>CHECK</code> - Check checkbox</span>
+            <span class="action-item"><code>UNCHECK</code> - Uncheck checkbox</span>
+            <span class="action-item"><code>CLEAR</code> - Clear field</span>
+            <span class="action-item"><code>FOCUS</code> - Focus element</span>
+          </div>
+        </div>
+
         <div class="tips-section">
-          <h4>💡 Pro Tips</h4>
+          <h4>🥷 NINJA MODE Pro Tips</h4>
           <ul>
-            <li><strong>Start Simple:</strong> Try <code>auto</code> selector type first - it tries multiple methods automatically</li>
-            <li><strong>Use Browser Tools:</strong> Right-click → Inspect Element to find IDs, classes, and names</li>
-            <li><strong>Text is Powerful:</strong> Use <code>text</code> type for buttons and links with visible text</li>
-            <li><strong>Data Attributes:</strong> Use <code>data</code> type with format like "data-testid=login-btn"</li>
-            <li><strong>Test Gradually:</strong> Start with one field, then add more as you confirm they work</li>
-            <li><strong>Partial Matching:</strong> Use <code>partialtext</code> when exact text might have extra spaces</li>
+            <li>Use <code style="background: #000; color: #00ff00; padding: 2px 6px; border-radius: 3px;">NINJA</code> for ultimate anti-robot protection with chaos mode</li>
+            <li>NINJA MODE does everything simultaneously: focus, hover, mouse movement, keyboard events</li>
+            <li>Random delays in NINJA MODE range from 0.8 to 3.5 seconds for maximum unpredictability</li>
+            <li>All other modes now have enhanced randomness (±30% variance)</li>
+            <li>Set <code>OFF</code> in trigger column to temporarily disable specific fields</li>
+            <li>Custom delays with <code>DELAY:milliseconds</code> now include ±30% randomness</li>
+            <li>Start with <code>auto</code> selector type - it tries multiple methods</li>
+            <li>NINJA MODE works on the most sophisticated anti-robot systems</li>
           </ul>
         </div>
       </div>
     </main>
 
     <footer class="footer">
-      <p>© Jay Gomz Inc.</p>
+      <p>© 2024 NINJA MODE Sheet-to-Form Automator - Ultimate Stealth Edition</p>
     </footer>
   </div>
 

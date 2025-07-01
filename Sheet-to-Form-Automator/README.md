@@ -1,183 +1,168 @@
-# Sheet-to-Form Automator Chrome Extension
+# 🥷 NINJA MODE Sheet-to-Form Automator Chrome Extension
 
-A powerful Chrome extension that automates form filling using data from Google Sheets with enhanced selector support.
+A powerful Chrome extension that automates form filling using data from Google Sheets with **NINJA MODE - the ultimate anti-robot chaos system** and **modern JavaScript website support**.
 
-## 🚀 Features
+## 🆕 NEW: NINJA MODE - ULTIMATE CHAOS!
 
-- **Google Sheets Integration**: Connect directly to your Google Sheets
-- **18+ Selector Types**: Multiple ways to find form elements easily
-- **Smart Auto-Detection**: Intelligent element finding with fallback strategies
-- **Cross-Frame Support**: Works with iframes and embedded forms
-- **Enhanced Actions**: Click, check, clear, focus, submit, and more
-- **Real-time Feedback**: Visual progress and detailed error reporting
-- **Sound Notifications**: Audio feedback for actions
+### 🔥 NINJA MODE Features
+- **🎯 Simultaneous Actions**: Focus + Hover + Mouse Move + Keyboard all at once!
+- **⚡ Random Everything**: Random delays (0.8-3.5s), random mouse paths, random event sequences  
+- **🔥 Keyboard Chaos**: Simulated key presses, multiple input methods, realistic typing patterns
+- **🌪️ Mouse Mayhem**: Curved mouse movement, multiple click events, hover simulations
+- **💥 Event Storms**: Fires multiple events simultaneously with micro-delays
+- **🎲 Unpredictable Timing**: Always changing delays and sequences
 
-## 📦 Installation
+### 🛡️ Enhanced Anti-Robot Protection
+- **NINJA MODE**: Ultimate chaos with simultaneous actions and random everything
+- **Stealth Modes**: HUMAN, STEALTH, ULTRA modes with enhanced randomness
+- **Speed Control**: FAST, NORMAL, SLOW options with ±30% variance
+- **Field Control**: Enable/disable specific fields with ON/OFF triggers
+- **Custom Delays**: Set precise delays with automatic ±30% randomness
 
-### Method 1: Load as Unpacked Extension
-1. Open Chrome and navigate to `chrome://extensions/`
-2. Enable "Developer mode" in the top right
-3. Click "Load unpacked" and select the `Sheet-to-Form-Automator` folder
-4. The extension should appear in your extensions list
+## 📊 NINJA MODE Sheet Format
 
-### Method 2: Generate Icons First
-If you see icon loading errors:
-1. Open `generate-icons.html` in your browser
-2. Download all three icon files (16x16, 48x48, 128x128)
-3. Place them in the `icons/` folder
-4. Reload the extension in Chrome
+Your Google Sheet now supports **5 columns** with the ultimate **NINJA** trigger:
 
-## 🔧 Setup
+| FieldName | Selector | SelectorType | Value | **Trigger** |
+|-----------|----------|--------------|-------|-------------|
+| Email | email | id | user@example.com | **NINJA** |
+| Password | password | name | mypassword | **NINJA** |
+| Login Button | Sign In | text | CLICK | **NINJA** |
+| Regular Field | newsletter | auto | CHECK | STEALTH |
 
-1. **Configure Google Sheet**:
-   - Create a Google Sheet with your form data
-   - Make the sheet publicly viewable
-   - Use the required column format (see below)
+## 🥷 NINJA MODE Trigger Options
 
-2. **Set Sheet URL**:
-   - Click the extension icon
-   - Click "Settings"
-   - Enter your Google Sheet URL
-   - Test the connection
+### 🔥 NEW: NINJA MODE
+- **`NINJA`** - **ULTIMATE CHAOS MODE!**
+  - Random delays: 0.8-3.5 seconds  
+  - Simultaneous actions: focus + hover + mouse + keyboard
+  - Multiple event storms with micro-delays
+  - Curved mouse movement paths
+  - Random post-processing chaos
+  - **Defeats the most sophisticated anti-robot systems!**
 
-3. **Fill Forms**:
-   - Navigate to any web form
-   - Click the extension icon
-   - Click "Fill This Form"
+### Enhanced Speed & Stealth Modes (Now with ±30% Randomness!)
+- **`FAST`** - 50-200ms delay (enhanced randomness)
+- **`NORMAL`** - 200-500ms delay (enhanced randomness)
+- **`SLOW`** - 600-1200ms delay (enhanced randomness)  
+- **`HUMAN`** - 800-1800ms delay (enhanced randomness)
+- **`STEALTH`** - 1500-2800ms delay (enhanced randomness)
+- **`ULTRA`** - 2500-4000ms delay (enhanced randomness)
 
-## 📋 Sheet Format
+### Control Options
+- **`ON`** / **`YES`** / **`TRUE`** - Process this field
+- **`OFF`** / **`NO`** / **`FALSE`** - Skip this field
+- **`DISABLED`** / **`SKIP`** - Don't process
+- **`DELAY:500`** - Custom delay with ±30% randomness
 
-Your Google Sheet must have exactly 4 columns:
+## 🔧 NINJA MODE Technical Features
 
-| FieldName | Selector | SelectorType | Value |
-|-----------|----------|--------------|-------|
-| Email | email | id | user@example.com |
-| Password | password | name | mypassword |
-| Login Button | Sign In | text | CLICK |
-| Newsletter | newsletter | auto | CHECK |
+### NINJA MODE Chaos Process
+When you use **`NINJA`** trigger, the extension performs:
 
-### Column Descriptions:
-- **FieldName**: Descriptive name for logging
-- **Selector**: Value used to find the element
-- **SelectorType**: Method to find the element (see supported types below)
-- **Value**: Data to enter, or special actions
+1. **🎯 Simultaneous Preparation Phase**:
+   - Curved mouse movement to target
+   - Multiple focus attempts with random delays
+   - Hover simulation with mouse events
+   - Random additional mouse events
 
-## 🎯 Supported Selector Types
+2. **💥 Chaos Value Setting Phase**:
+   - Multiple selection methods simultaneously  
+   - Event storm: input, change, keyboard, focus, paste events
+   - Random micro-delays between events (1-15ms)
+   - Multiple simultaneous event dispatching
 
-### Basic Selectors
-- **`css`** - CSS selector (e.g., `#email`, `.submit-btn`)
-- **`xpath`** - XPath expression (e.g., `//input[@type='email']`)
-- **`id`** - Element ID (e.g., `email`, `login-form`)
-- **`name`** - Name attribute (e.g., `username`, `password`)
-- **`class`** - CSS class name (e.g., `form-input`, `btn-primary`)
-- **`tag`** - HTML tag name (e.g., `input`, `button`)
+3. **🌪️ Post-Processing Chaos Phase**:
+   - Random blur/focus cycles
+   - Random clicks near the element
+   - Additional validation triggers
+   - Chaos delays (50-200ms)
 
-### Text-Based Selectors
-- **`text`** - Exact text content (e.g., `Sign In`, `Submit`)
-- **`partialtext`** - Partial text match (e.g., `Sign`, `Submit Form`)
-- **`placeholder`** - Placeholder text (e.g., `Enter your email`)
-- **`label`** - Associated label text (e.g., `Email Address`)
+### Enhanced Modern JavaScript Website Support
+- **Robust Event Handling**: Dispatches focus, input, change, and blur events
+- **Human-like Behavior**: Realistic typing patterns and mouse movements  
+- **Enhanced Compatibility**: Works on websites that block basic automation
+- **Progressive Enhancement**: Falls back gracefully
 
-### Attribute Selectors
-- **`title`** - Title attribute (e.g., `Click to submit`)
-- **`value`** - Value attribute (e.g., `Submit`, `Login`)
-- **`type`** - Input type (e.g., `email`, `password`, `submit`)
-- **`alt`** - Alt text for images (e.g., `Submit button`)
-- **`role`** - ARIA role (e.g., `button`, `textbox`)
-- **`data`** - Data attributes (e.g., `data-testid=login-btn`)
+## 💡 NINJA MODE Usage Examples
 
-### Smart Selectors
-- **`auto`** - Tries multiple detection methods automatically
-- **`smart`** - Intelligent element detection with fallbacks
+### Ultimate Stealth Login
+| FieldName | Selector | SelectorType | Value | Trigger |
+|-----------|----------|--------------|-------|---------|
+| Username | username | id | john.doe | **NINJA** |
+| Password | password | name | secret123 | **NINJA** |
+| Remember Me | remember | auto | CHECK | **NINJA** |
+| Submit | Login | text | CLICK | **NINJA** |
 
-## 🎬 Special Actions
+### Mixed Mode Form (NINJA + Others)
+| FieldName | Selector | SelectorType | Value | Trigger |
+|-----------|----------|--------------|-------|---------|
+| Critical Field | email | id | user@test.com | **NINJA** |
+| Regular Field | firstName | name | John | HUMAN |
+| Fast Field | lastName | name | Doe | FAST |
+| Submit Button | Submit | text | CLICK | **NINJA** |
 
-Instead of entering text, you can use these special values:
-
-- **`CLICK`** - Click buttons, links, or any clickable element
-- **`CHECK`** - Check checkboxes or radio buttons
-- **`UNCHECK`** - Uncheck checkboxes or radio buttons
-- **`CLEAR`** - Clear field contents
-- **`FOCUS`** - Focus on element
-- **`SUBMIT`** - Submit the form
-
-## 💡 Pro Tips
-
-1. **Start Simple**: Try `auto` selector type first - it automatically tries multiple methods
-2. **Use Browser Tools**: Right-click → Inspect Element to find IDs, classes, and names
-3. **Text is Powerful**: Use `text` type for buttons and links with visible text
-4. **Data Attributes**: Use `data` type with format like "data-testid=login-btn"
-5. **Test Gradually**: Start with one field, then add more as you confirm they work
-6. **Partial Matching**: Use `partialtext` when exact text might have extra spaces
+### E-commerce Checkout (Full NINJA)
+| FieldName | Selector | SelectorType | Value | Trigger |
+|-----------|----------|--------------|-------|---------|
+| Email | email | auto | buyer@email.com | **NINJA** |
+| First Name | firstName | name | John | **NINJA** |
+| Last Name | lastName | name | Doe | **NINJA** |
+| Phone | phone | auto | 555-1234 | **NINJA** |
+| Checkout | Place Order | text | CLICK | **NINJA** |
 
 ## 🛠️ Troubleshooting
 
-### Extension Won't Load
-- Check that all icon files exist in the `icons/` folder
-- Verify manifest.json is valid
-- Check Chrome Developer Console for errors
+### Even NINJA MODE Detected?
+- Increase the number of fields using **NINJA** mode
+- Try mixing **NINJA** with **ULTRA** and **STEALTH** modes
+- Add dummy fields with **`OFF`** trigger to create more realistic patterns
 
-### Sheet Connection Fails
-- Ensure the Google Sheet is publicly viewable
-- Verify the URL format is correct
-- Check your internet connection
+### Website Still Blocks Automation?
+1. Use **NINJA** mode for all critical fields
+2. Add random **`DELAY:2000`** fields between important actions  
+3. Mix different trigger modes for unpredictability
+4. Test with **XPath** selectors for complex elements
 
-### Form Fields Not Filling
-- Try different selector types (start with `auto`)
-- Use browser developer tools to inspect elements
-- Check that elements are visible and enabled
-- Try `smart` selector type for difficult elements
+### NINJA MODE Too Slow?
+- Use **NINJA** only for critical fields (login, submit buttons)
+- Mix with **HUMAN** or **STEALTH** for less critical fields
+- Remember: NINJA mode prioritizes stealth over speed
 
-### Common Selector Examples
+## 🎯 When to Use Each Mode
 
-| Element Type | Selector | SelectorType | Notes |
-|--------------|----------|--------------|-------|
-| Email input with ID | `email` | `id` | Most reliable |
-| Password by name | `password` | `name` | Common pattern |
-| Submit button | `Submit` | `text` | Works with button text |
-| Checkbox by label | `Remember me` | `label` | Finds by label text |
-| Any element | `login-button` | `auto` | Tries multiple methods |
-| Data attribute | `data-testid=submit` | `data` | Modern web apps |
-
-## 📝 Development
-
-### File Structure
-```
-Sheet-to-Form-Automator/
-├── manifest.json          # Extension configuration
-├── popup.html/js/css      # Extension popup interface
-├── options.html/js/css    # Settings page
-├── content.js            # Enhanced form filling logic
-├── icons/               # Extension icons
-├── sounds/             # Audio feedback files
-└── README.md          # This file
-```
-
-### Key Enhancements
-- **18+ selector types** for maximum compatibility
-- **Smart auto-detection** with multiple fallback strategies
-- **Enhanced error reporting** with detailed selector information
-- **Additional actions** like CLEAR, FOCUS, SUBMIT, UNCHECK
-- **Cross-frame element detection** for complex pages
+- **🥷 NINJA**: Ultimate protection, critical actions, sophisticated anti-robot systems
+- **🔒 STEALTH/ULTRA**: High protection, important forms, moderate anti-robot systems  
+- **👤 HUMAN**: Balanced protection, general use, basic anti-robot systems
+- **⚡ NORMAL/FAST**: Speed priority, simple forms, no anti-robot protection
 
 ## 🔒 Privacy & Security
 
-- No data is stored on external servers
-- Google Sheets data is fetched directly by your browser
-- No tracking or analytics
-- All processing happens locally
+- **No external servers** - All processing happens locally
+- **No data collection** - Your sheet data stays private
+- **Open source** - Full transparency
+- **Secure** - Only accesses pages you explicitly use it on
 
-## 📄 License
+## 🚀 Advanced NINJA Tips
 
-© Jay Gomz Inc. All rights reserved.
+1. **Start with NINJA** - Use for login forms and critical actions first
+2. **Mix Modes** - Combine NINJA with other modes for unpredictability  
+3. **Random Patterns** - Don't use NINJA for every field, create realistic patterns
+4. **Test Gradually** - Start with one NINJA field, then add more
+5. **Monitor Console** - Check browser console for NINJA mode feedback
 
-## 🆘 Support
+---
 
-For issues or questions:
-1. Check the troubleshooting section above
-2. Try the `auto` selector type first
-3. Verify your Google Sheet format
-4. Test with simple forms first
-5. Check browser console for error messages
+**NINJA MODE defeats even the most sophisticated anti-robot mechanisms with ultimate chaos and unpredictability!** 🥷
 
-The enhanced selector support makes finding elements much easier - when in doubt, use `auto` or `smart` selector types!
+## 📞 Support
+
+For NINJA MODE issues:
+1. Check if NINJA trigger is properly configured  
+2. Mix NINJA with other stealth modes for variety
+3. Verify selector types are correct for complex sites
+4. Test NINJA mode on simple forms first
+5. Check browser console for detailed NINJA feedback
+
+---
+© 2024 NINJA MODE Sheet-to-Form Automator - Ultimate Stealth Edition 🥷

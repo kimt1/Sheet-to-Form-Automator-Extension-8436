@@ -1,54 +1,48 @@
 /**
- * Sheet-to-Form Automator - Popup Script
- * Handles user interactions and form filling orchestration
+ * Sheet-to-Form Automator - Enhanced Popup Script
+ * Updated to support new trigger column format
  */
-
 class PopupController {
   constructor() {
     this.fillBtn = document.getElementById('fillFormBtn');
     this.statusText = document.getElementById('statusText');
-    this.statusArea = document.getElementById('statusArea');
     this.progressBar = document.getElementById('progressBar');
     this.optionsBtn = document.getElementById('optionsBtn');
-    
+    this.helpBtn = document.getElementById('helpBtn');
+
     this.initializeEventListeners();
     this.checkSheetUrl();
+    console.log('✅ Enhanced Popup initialized');
   }
 
-  /**
-   * Initialize event listeners for popup interactions
-   */
   initializeEventListeners() {
     this.fillBtn.addEventListener('click', () => this.handleFillForm());
     this.optionsBtn.addEventListener('click', () => this.openOptions());
+    this.helpBtn.addEventListener('click', () => this.showHelp());
   }
 
-  /**
-   * Check if Google Sheet URL is configured
-   */
   async checkSheetUrl() {
     try {
       const result = await chrome.storage.sync.get(['sheetUrl']);
       if (!result.sheetUrl) {
-        this.updateStatus('Please configure your Google Sheet URL in settings', 'error');
+        this.updateStatus('⚠️ Configure your Google Sheet URL in settings', 'error');
         this.fillBtn.disabled = true;
+      } else {
+        this.updateStatus('✅ Ready to fill forms with enhanced logic', 'success');
+        this.fillBtn.disabled = false;
       }
     } catch (error) {
       console.error('Error checking sheet URL:', error);
-      this.updateStatus('Error accessing storage', 'error');
+      this.updateStatus('❌ Error checking settings', 'error');
     }
   }
 
-  /**
-   * Handle form filling process
-   */
   async handleFillForm() {
+    console.log('🚀 Enhanced fill form button clicked');
+    
     try {
-      // Play click sound
-      await this.playSound('click.mp3');
-      
       this.fillBtn.disabled = true;
-      this.updateStatus('Getting current page...', 'loading');
+      this.updateStatus('🚀 Starting enhanced form fill...', 'loading');
       this.showProgress(true);
 
       // Get current tab
@@ -57,184 +51,189 @@ class PopupController {
         throw new Error('No active tab found');
       }
 
-      // Get sheet URL from storage
-      const result = await chrome.storage.sync.get(['sheetUrl']);
-      if (!result.sheetUrl) {
-        throw new Error('No Google Sheet URL configured');
+      console.log('📄 Current tab:', tab.url);
+
+      // Check if we can access this tab
+      if (tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://')) {
+        throw new Error('Cannot access Chrome system pages');
       }
 
-      this.updateStatus('Fetching data from Google Sheet...', 'loading');
+      // Get sheet data
+      const result = await chrome.storage.sync.get(['sheetUrl']);
+      if (!result.sheetUrl) {
+        throw new Error('No sheet URL configured');
+      }
 
-      // Fetch and parse CSV data
-      const csvData = await this.fetchSheetData(result.sheetUrl);
-      const formData = this.parseCSVData(csvData);
+      this.updateStatus('📊 Getting enhanced sheet data...', 'loading');
+      const formData = await this.getFormData(result.sheetUrl);
 
-      if (formData.length === 0) {
+      if (!formData || formData.length === 0) {
         throw new Error('No form data found in sheet');
       }
 
-      this.updateStatus(`Processing ${formData.length} form fields...`, 'loading');
+      console.log('📋 Enhanced form data loaded:', formData);
+      this.updateStatus(`📝 Filling ${formData.length} fields with enhanced logic...`, 'loading');
 
-      // Inject content script and send data
+      // Inject content script and fill form
       await chrome.scripting.executeScript({
         target: { tabId: tab.id },
         files: ['content.js']
       });
 
-      // Send form data to content script
+      // Wait a bit for content script to load
+      await this.sleep(500);
+
+      // Send message to content script
       const response = await chrome.tabs.sendMessage(tab.id, {
         action: 'fillForm',
         data: formData
       });
 
-      // Handle response
-      if (response && response.success) {
-        const successCount = response.successCount || 0;
-        const totalCount = response.totalCount || 0;
-        const errorCount = totalCount - successCount;
+      console.log('📨 Enhanced content script response:', response);
 
-        if (errorCount === 0) {
-          await this.playSound('success.mp3');
-          this.updateStatus(`Success! Filled all ${successCount} fields.`, 'success');
-        } else {
-          await this.playSound('error.mp3');
-          this.updateStatus(`Completed with ${errorCount} errors. Filled ${successCount} of ${totalCount} fields.`, 'error');
+      if (response.success) {
+        this.updateStatus(`✅ Enhanced form filled! ${response.successCount}/${response.totalCount} fields`, 'success');
+        if (response.errors && response.errors.length > 0) {
+          console.log('⚠️ Some errors occurred:', response.errors);
         }
       } else {
-        throw new Error(response?.error || 'Unknown error occurred');
+        throw new Error(response.error || 'Enhanced form filling failed');
       }
 
+      // Auto-close popup after 3 seconds
+      setTimeout(() => {
+        window.close();
+      }, 3000);
+
     } catch (error) {
-      console.error('Form filling error:', error);
-      await this.playSound('error.mp3');
-      this.updateStatus(`Error: ${error.message}`, 'error');
+      console.error('❌ Enhanced error:', error);
+      this.updateStatus(`❌ Error: ${error.message}`, 'error');
     } finally {
       this.fillBtn.disabled = false;
       this.showProgress(false);
     }
   }
 
-  /**
-   * Fetch data from Google Sheet as CSV
-   */
-  async fetchSheetData(sheetUrl) {
-    // Convert Google Sheet URL to CSV export URL
-    const csvUrl = this.convertToCsvUrl(sheetUrl);
-    
-    const response = await fetch(csvUrl);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch sheet data: ${response.status}`);
+  async getFormData(sheetUrl) {
+    try {
+      // Extract sheet ID from URL
+      const sheetIdMatch = sheetUrl.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+      if (!sheetIdMatch) {
+        throw new Error('Invalid Google Sheets URL');
+      }
+
+      const sheetId = sheetIdMatch[1];
+      const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
+
+      console.log('📡 Fetching from:', csvUrl);
+
+      const response = await fetch(csvUrl);
+      if (!response.ok) {
+        if (response.status === 403) {
+          throw new Error('Sheet access denied. Make sure it\'s publicly viewable.');
+        }
+        throw new Error(`Failed to fetch sheet data: ${response.status}`);
+      }
+
+      const csvText = await response.text();
+      console.log('📄 CSV data received:', csvText.substring(0, 200) + '...');
+
+      return this.parseCSV(csvText);
+    } catch (error) {
+      throw new Error(`Sheet error: ${error.message}`);
     }
-    
-    return await response.text();
   }
 
-  /**
-   * Convert Google Sheet URL to CSV export URL
-   */
-  convertToCsvUrl(sheetUrl) {
-    // Extract sheet ID from various Google Sheets URL formats
-    const sheetIdMatch = sheetUrl.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
-    if (!sheetIdMatch) {
-      throw new Error('Invalid Google Sheet URL format');
-    }
-    
-    const sheetId = sheetIdMatch[1];
-    return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
-  }
-
-  /**
-   * Parse CSV data into structured form data
-   */
-  parseCSVData(csvText) {
-    const lines = csvText.split('\n');
+  parseCSV(csvText) {
+    const lines = csvText.split('\n').filter(line => line.trim());
     const formData = [];
-    
-    // Skip header row and process data rows
+
+    // Skip header row, start from index 1
     for (let i = 1; i < lines.length; i++) {
       const line = lines[i].trim();
       if (!line) continue;
-      
+
+      // Simple CSV parsing (handles quoted fields)
       const columns = this.parseCSVLine(line);
+      
       if (columns.length >= 4) {
-        const [fieldName, selector, selectorType, value] = columns;
-        
-        if (selector && selectorType && value) {
-          formData.push({
-            fieldName: fieldName.trim(),
-            selector: selector.trim(),
-            selectorType: selectorType.trim().toLowerCase(),
-            value: value.trim()
-          });
+        const fieldEntry = {
+          fieldName: columns[0],
+          selector: columns[1],
+          selectorType: columns[2],
+          value: columns[3]
+        };
+
+        // Check for optional 5th column (trigger/anti-robot settings)
+        if (columns.length >= 5 && columns[4].trim()) {
+          fieldEntry.trigger = columns[4].trim();
         }
+
+        formData.push(fieldEntry);
       }
     }
-    
+
+    console.log('📊 Parsed enhanced form data:', formData);
     return formData;
   }
 
-  /**
-   * Parse a single CSV line, handling quoted values
-   */
   parseCSVLine(line) {
-    const columns = [];
+    const result = [];
     let current = '';
     let inQuotes = false;
-    
+
     for (let i = 0; i < line.length; i++) {
       const char = line[i];
-      
-      if (char === '"') {
-        inQuotes = !inQuotes;
+      const nextChar = line[i + 1];
+
+      if (char === '"' && !inQuotes) {
+        inQuotes = true;
+      } else if (char === '"' && inQuotes) {
+        if (nextChar === '"') {
+          current += '"';
+          i++; // Skip next quote
+        } else {
+          inQuotes = false;
+        }
       } else if (char === ',' && !inQuotes) {
-        columns.push(current);
+        result.push(current.trim());
         current = '';
       } else {
         current += char;
       }
     }
-    
-    columns.push(current);
-    return columns.map(col => col.replace(/^"|"$/g, ''));
+
+    result.push(current.trim());
+    return result;
   }
 
-  /**
-   * Play sound effect
-   */
-  async playSound(soundFile) {
-    try {
-      const audio = new Audio(chrome.runtime.getURL(`sounds/${soundFile}`));
-      audio.volume = 0.3;
-      await audio.play();
-    } catch (error) {
-      console.warn('Could not play sound:', error);
-    }
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  /**
-   * Update status display
-   */
-  updateStatus(message, type = 'default') {
+  updateStatus(message, type = '') {
     this.statusText.textContent = message;
-    this.statusText.className = `status-text ${type ? `status-${type}` : ''}`;
+    this.statusText.className = `status-text ${type ? 'status-' + type : ''}`;
+    console.log(`📊 Status: ${message}`);
   }
 
-  /**
-   * Show/hide progress bar
-   */
   showProgress(show) {
     this.progressBar.style.display = show ? 'block' : 'none';
   }
 
-  /**
-   * Open options page
-   */
   openOptions() {
     chrome.runtime.openOptionsPage();
   }
+
+  showHelp() {
+    chrome.tabs.create({
+      url: 'https://github.com/yourusername/sheet-to-form-automator'
+    });
+  }
 }
 
-// Initialize popup when DOM is loaded
+// Initialize when DOM loads
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('📱 DOM loaded, initializing enhanced popup');
   new PopupController();
 });

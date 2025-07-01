@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Real Extension Icons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .icon-preview {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        .icon-item {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background: #fafafa;
+        }
+        .download-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .download-btn:hover {
+            background: #45a049;
+        }
+        .instructions {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Create Extension Icons</h1>
+        <p>This will generate the actual PNG icon files needed for your Chrome extension.</p>
+        
+        <div id="iconContainer" class="icon-preview">
+            <!-- Icons will be generated here -->
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Instructions:</h3>
+            <ol>
+                <li>Click "Generate Icons" button below</li>
+                <li>Right-click each icon and "Save image as..."</li>
+                <li>Save them in the <code>Sheet-to-Form-Automator/icons/</code> folder with exact names:
+                    <ul>
+                        <li><code>icon16.png</code></li>
+                        <li><code>icon48.png</code></li>
+                        <li><code>icon128.png</code></li>
+                    </ul>
+                </li>
+                <li>Update manifest.json to use the icon files</li>
+            </ol>
+        </div>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <button onclick="generateIcons()" class="download-btn">🎨 Generate Icons</button>
+        </div>
+    </div>
+
+    <script>
+        function createIcon(size) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = size;
+            canvas.height = size;
+
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#4CAF50');
+            gradient.addColorStop(1, '#45a049');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+
+            // Add rounded corners
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            const radius = size * 0.15;
+            ctx.moveTo(radius, 0);
+            ctx.lineTo(size - radius, 0);
+            ctx.quadraticCurveTo(size, 0, size, radius);
+            ctx.lineTo(size, size - radius);
+            ctx.quadraticCurveTo(size, size, size - radius, size);
+            ctx.lineTo(radius, size);
+            ctx.quadraticCurveTo(0, size, 0, size - radius);
+            ctx.lineTo(0, radius);
+            ctx.quadraticCurveTo(0, 0, radius, 0);
+            ctx.closePath();
+            ctx.fill();
+
+            // Reset composite operation
+            ctx.globalCompositeOperation = 'source-over';
+
+            // Add sheet/form icon
+            const padding = size * 0.2;
+            const sheetWidth = size - (padding * 2);
+            const sheetHeight = sheetWidth * 0.8;
+            const sheetX = padding;
+            const sheetY = (size - sheetHeight) / 2;
+
+            // Sheet background
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.fillRect(sheetX, sheetY, sheetWidth, sheetHeight);
+
+            // Sheet border
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.lineWidth = Math.max(1, size * 0.03);
+            ctx.strokeRect(sheetX, sheetY, sheetWidth, sheetHeight);
+
+            // Add grid lines
+            ctx.strokeStyle = 'rgba(76, 175, 80, 0.7)';
+            ctx.lineWidth = Math.max(1, size * 0.015);
+
+            // Horizontal lines
+            const lineCount = Math.max(3, Math.floor(size / 20));
+            for (let i = 1; i < lineCount; i++) {
+                const y = sheetY + (sheetHeight / lineCount) * i;
+                ctx.beginPath();
+                ctx.moveTo(sheetX + padding * 0.3, y);
+                ctx.lineTo(sheetX + sheetWidth - padding * 0.3, y);
+                ctx.stroke();
+            }
+
+            // Vertical lines (columns)
+            const colCount = 3;
+            for (let i = 1; i < colCount; i++) {
+                const x = sheetX + (sheetWidth / colCount) * i;
+                ctx.beginPath();
+                ctx.moveTo(x, sheetY + padding * 0.3);
+                ctx.lineTo(x, sheetY + sheetHeight - padding * 0.3);
+                ctx.stroke();
+            }
+
+            // Add a small "form" indicator
+            if (size >= 48) {
+                ctx.fillStyle = '#4CAF50';
+                ctx.font = `bold ${size * 0.15}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.fillText('📋', size / 2, sheetY + sheetHeight + padding * 0.7);
+            }
+
+            return canvas;
+        }
+
+        function generateIcons() {
+            const container = document.getElementById('iconContainer');
+            container.innerHTML = '';
+            
+            const sizes = [16, 48, 128];
+            
+            sizes.forEach(size => {
+                const canvas = createIcon(size);
+                
+                const iconDiv = document.createElement('div');
+                iconDiv.className = 'icon-item';
+                
+                // Add size label
+                const label = document.createElement('h3');
+                label.textContent = `${size}x${size}`;
+                iconDiv.appendChild(label);
+                
+                // Add canvas
+                canvas.style.border = '1px solid #ddd';
+                iconDiv.appendChild(canvas);
+                
+                // Add instructions
+                const instruction = document.createElement('p');
+                instruction.innerHTML = `Right-click → Save as:<br><strong>icon${size}.png</strong>`;
+                instruction.style.marginTop = '10px';
+                instruction.style.fontSize = '14px';
+                iconDiv.appendChild(instruction);
+                
+                container.appendChild(iconDiv);
+            });
+        }
+    </script>
+</body>
+</html>
