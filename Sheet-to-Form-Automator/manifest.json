@@ -1,21 +1,22 @@
 {
   "manifest_version": 3,
   "name": "Sheet-to-Form Automator",
-  "version": "1.0.0",
-  "description": "Automate form filling using Google Sheets data",
+  "version": "1.2.0",
+  "description": "Automate form filling using Google Sheets data with bulletproof reliability",
   "permissions": [
     "storage",
     "activeTab",
     "scripting"
   ],
   "host_permissions": [
-    "https://docs.google.com/spreadsheets/*",
+    "https://docs.google.com/*",
+    "https://sheets.google.com/*",
     "http://*/*",
     "https://*/*"
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Sheet-to-Form Automator"
+    "default_title": "Sheet-to-Form Automator - Fill forms from Google Sheets"
   },
   "options_page": "options.html",
   "icons": {
@@ -27,7 +28,8 @@
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"],
-      "run_at": "document_end"
+      "run_at": "document_end",
+      "all_frames": false
     }
   ]
 }

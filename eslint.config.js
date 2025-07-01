@@ -1,10 +1,17 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import react from 'eslint-plugin-react'
 
 export default [
-  { ignores: ['dist'] },
+  {
+    ignores: [
+      'dist',
+      'node_modules',
+      'Sheet-to-Form-Automator'
+    ],
+  },
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx}'],
@@ -12,11 +19,8 @@ export default [
       ecmaVersion: 2020,
       globals: {
         ...globals.browser,
-        ...globals.node,
-        React: true,
-        JSX: true,
-        // Chrome extension globals
-        chrome: 'readonly',
+        React: 'readonly',
+        JSX: 'readonly',
       },
       parserOptions: {
         ecmaFeatures: {
@@ -25,48 +29,27 @@ export default [
         sourceType: 'module',
       },
     },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     plugins: {
+      'react': react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
     rules: {
-      'no-undef': 'error',
-      'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'off',
-      'react-refresh/only-export-components': 'off',
-      'no-unused-vars': 'off',
-      'no-case-declarations': 'off',
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'no-unused-vars': 'warn',
+      'no-console': 'warn',
     },
   },
-  // Separate configuration for Chrome extension files
-  {
-    files: ['Sheet-to-Form-Automator/**/*.js'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: {
-        ...globals.browser,
-        // Chrome extension specific globals
-        chrome: 'readonly',
-        console: 'readonly',
-        document: 'readonly',
-        window: 'readonly',
-        setTimeout: 'readonly',
-        clearTimeout: 'readonly',
-        fetch: 'readonly',
-        Audio: 'readonly',
-        MouseEvent: 'readonly',
-        Event: 'readonly',
-        KeyboardEvent: 'readonly',
-        XPathResult: 'readonly',
-      },
-      parserOptions: {
-        sourceType: 'script', // Chrome extension scripts are not modules
-      },
-    },
-    rules: {
-      'no-undef': 'error',
-      'no-unused-vars': 'off',
-      'no-case-declarations': 'off',
-    },
-  },
-];
+]
