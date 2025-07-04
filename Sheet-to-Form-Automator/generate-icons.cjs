@@ -1,5 +1,6 @@
 // Node.js script to generate PNG icons
 const fs = require('fs');
+const path = require('path');
 const { createCanvas } = require('canvas');
 
 function createIcon(size) {
@@ -81,13 +82,15 @@ const sizes = [16, 48, 128];
 sizes.forEach(size => {
     const canvas = createIcon(size);
     const buffer = canvas.toBuffer('image/png');
+    const iconsDir = path.join(__dirname, 'icons');
     
-    if (!fs.existsSync('icons')) {
-        fs.mkdirSync('icons');
+    if (!fs.existsSync(iconsDir)) {
+        fs.mkdirSync(iconsDir, { recursive: true });
     }
     
-    fs.writeFileSync(`icons/icon${size}.png`, buffer);
-    console.log(`✅ Generated icon${size}.png`);
+    const filePath = path.join(iconsDir, `icon${size}.png`);
+    fs.writeFileSync(filePath, buffer);
+    console.log(`✅ Generated ${filePath}`);
 });
 
 console.log('🎉 All icons generated successfully!');

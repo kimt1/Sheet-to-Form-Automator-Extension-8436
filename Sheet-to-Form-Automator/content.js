@@ -158,7 +158,10 @@ if (window.sheetFormAutomatorLoaded) {
       case 'STEALTH': return randomDelay(1500, 3000);
       default:
         if (t.startsWith('DELAY:')) {
-          const ms = parseInt(t.split(':')[1]) || 500;
+          let ms = parseInt(t.split(':')[1]);
+          if (isNaN(ms)) {
+            ms = 500; // Default if parsing fails
+          }
           return Math.max(50, ms); // Minimum 50ms
         }
         return randomDelay(200, 600);

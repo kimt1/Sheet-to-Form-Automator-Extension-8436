@@ -1,55 +1,38 @@
 import js from '@eslint/js'
 import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import react from 'eslint-plugin-react'
 
 export default [
   {
     ignores: [
-      'dist',
-      'node_modules',
-      'Sheet-to-Form-Automator'
+      'dist', // If a build step were to be added for the extension
+      'node_modules'
     ],
   },
   js.configs.recommended,
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['**/*.js', '**/*.cjs'], // Adjusted for .js and .cjs files
     languageOptions: {
       ecmaVersion: 2020,
       globals: {
-        ...globals.browser,
-        React: 'readonly',
-        JSX: 'readonly',
+        ...globals.browser, // For browser environments (content scripts, popup, options)
+        ...globals.node,   // For Node.js scripts like generate-icons.cjs
+        chrome: 'readonly', // Add chrome global for extension APIs
       },
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-        sourceType: 'module',
-      },
-    },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
-    plugins: {
-      'react': react,
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      sourceType: 'module', // Default, generate-icons.cjs will be commonjs
     },
     rules: {
-      ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
       'no-unused-vars': 'warn',
-      'no-console': 'warn',
+      'no-console': 'warn', // Keep this, useful for extension development
+      // Add any other general JS rules or extension specific rules here
     },
   },
+  { // Specific override for .cjs files to be treated as CommonJS
+    files: ['**/*.cjs'],
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: {
+        ...globals.node, // Node.js globals
+      }
+    }
+  }
 ]
